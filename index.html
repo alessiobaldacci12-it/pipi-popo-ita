@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARRIVA ALLA PIPI O ALLA POPO 💩 - Il gioco delle parole</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Pop-up Regole del Gioco -->
+    <div id="rules-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Come si gioca? 🎯</h2>
+            </div>
+            <p class="modal-subtitle">Trova la catena di parole per raggiungere l'obiettivo!</p>
+            <ul class="rules-list">
+                <li>
+                    <span class="rule-icon">🔤</span>
+                    <span>Ad ogni mossa inserisci una parola valida di <strong>4 lettere</strong>.</span>
+                </li>
+                <li>
+                    <span class="rule-icon">✏️</span>
+                    <span>Puoi cambiare <strong>1 sola lettera</strong> rispetto alla parola precedente.</span>
+                </li>
+                <li>
+                    <span class="rule-icon">🟩</span>
+                    <span>Se una lettera è nella <strong>posizione corretta</strong> rispetto all'obiettivo, si colorerà di <strong class="green-text">verde</strong>.</span>
+                </li>
+                <li>
+                    <span class="rule-icon">🏆</span>
+                    <span>Raggiungi l'obiettivo usando il minor numero possibile di parole extra!</span>
+                </li>
+            </ul>
+            <button id="close-modal-btn" class="modal-btn action-btn" onclick="closeModal()">INIZIA A GIOCARE 🚀</button>
+        </div>
+    </div>
+
+    <!-- Pop-up Statistiche -->
+    <div id="stats-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h2>STATISTICHE 📊</h2>
+            <div class="stats-container">
+                <div class="stat-box">
+                    <span id="stat-played">0</span>
+                    <small>Giocate</small>
+                </div>
+                <div class="stat-box">
+                    <span id="stat-win-rate">0%</span>
+                    <small>Vittorie</small>
+                </div>
+                <div class="stat-box">
+                    <span id="stat-streak">0</span>
+                    <small>Streak</small>
+                </div>
+                <div class="stat-box">
+                    <span id="stat-max-streak">0</span>
+                    <small>Max Streak</small>
+                </div>
+            </div>
+
+            <h3>PAROLE IN PIÙ RISPETTO AL MINIMO</h3>
+            <div id="guess-distribution" class="distribution-container">
+                <!-- Generato via JS -->
+            </div>
+
+            <button class="modal-btn secondary-btn" onclick="closeStatsModal()">CHIUDI</button>
+        </div>
+    </div>
+
+    <header>
+        <div class="header-top">
+            <h1>PIPI / POPO 💩</h1>
+            <div class="header-actions">
+                <button class="icon-btn" onclick="openStatsModal()" title="Statistiche">📊</button>
+                <a href="https://paypal.me/AlessioBaldacci" target="_blank" rel="noopener noreferrer" class="icon-btn paypal-btn" title="Offri un caffè con PayPal ☕">☕</a>
+            </div>
+        </div>
+        
+        <!-- Selettore Tipo di Gioco -->
+        <div class="type-selector">
+            <button id="btn-daily" class="type-btn active" onclick="switchGameType('DAILY')">📅 Giornaliera</button>
+            <button id="btn-infinite" class="type-btn" onclick="switchGameType('INFINITE')">♾️ Infinita</button>
+        </div>
+
+        <!-- Selettore Obiettivo -->
+        <div class="mode-selector">
+            <button id="btn-pipi" class="mode-btn active" onclick="switchTarget('PIPI')">Obiettivo PIPI</button>
+            <button id="btn-popo" class="mode-btn" onclick="switchTarget('POPO')">Obiettivo POPO</button>
+        </div>
+    </header>
+
+    <main class="game-container">
+        <div class="info-board">
+            <p>Partenza: <strong id="start-word">----</strong></p>
+            <p>Obiettivo: <strong id="target-word">PIPI</strong></p>
+            <p>Mosse minime: <span id="min-moves">?</span></p>
+        </div>
+
+        <div id="chain-board" class="chain-board">
+            <!-- Griglia di gioco -->
+        </div>
+
+        <div class="input-area">
+            <input type="text" id="word-input" maxlength="4" placeholder="SCRIVI..." autocomplete="off">
+            <button id="submit-btn" onclick="submitWord()">INVIA</button>
+        </div>
+
+        <div class="action-controls">
+            <button id="surrender-btn" class="surrender-btn" onclick="surrenderGame()">🏳️ MI ARRENDO</button>
+            <button id="next-btn" class="next-btn hidden" onclick="initGame()">NUOVA PARTITA 🔄</button>
+        </div>
+
+        <p id="message-area" class="message-area"></p>
+    </main>
+
+    <script src="dizionario.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
